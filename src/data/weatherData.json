@@ -1,0 +1,42 @@
+{
+    "temperature": {
+      "actual": 24,
+      "maxima": 28,
+      "minima": 20, 
+      "dia":[
+        { "hora": "00:00", "temperatura": 15 },
+        { "hora": "01:00", "temperatura": 14 },
+        { "hora": "02:00", "temperatura": 14 },
+        { "hora": "03:00", "temperatura": 13 },
+        { "hora": "04:00", "temperatura": 13 },
+        { "hora": "05:00", "temperatura": 13 },
+        { "hora": "06:00", "temperatura": 14 },
+        { "hora": "07:00", "temperatura": 15 },
+        { "hora": "08:00", "temperatura": 17 },
+        { "hora": "09:00", "temperatura": 20 },
+        { "hora": "10:00", "temperatura": 22 },
+        { "hora": "11:00", "temperatura": 24 },
+        { "hora": "12:00", "temperatura": 26 },
+        { "hora": "13:00", "temperatura": 28 },
+        { "hora": "14:00", "temperatura": 29 },
+        { "hora": "15:00", "temperatura": 29 },
+        { "hora": "16:00", "temperatura": 28 },
+        { "hora": "17:00", "temperatura": 27 },
+        { "hora": "18:00", "temperatura": 25 },
+        { "hora": "19:00", "temperatura": 23 },
+        { "hora": "20:00", "temperatura": 21 },
+        { "hora": "21:00", "temperatura": 19 },
+        { "hora": "22:00", "temperatura": 18 },
+        { "hora": "23:00", "temperatura": 16 }
+      ]
+    },
+    "uvIndice": 5,
+    "velocidadViento": 12,
+    "sunTimes": {
+      "sunrise": "06:30 AM",
+      "sunset": "07:30 PM"
+    },
+    "humedad": 60,
+    "visibilidad": {"descripcion":"Bueno", "valor": 10},
+    "calidadAire": {"descripcion":"Bueno", "valor": 105}
+}
