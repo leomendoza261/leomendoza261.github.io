@@ -11,39 +11,39 @@ function App() {
   return (
     <div className="container-fluid vh-100 bg-info text-white">
 
-      <div className='row'> {/* renglon 1 que contiene la temperatura actual y Dashboard */}
-        <div className='col-3 text-center my-2'>
+      <div className='row bg-info'> {/* renglon 1 que contiene la temperatura actual y Dashboard */}
+        <div className='col-lg-3 col-sm-12 text-center my-2'>
           <CardSimple titulo={"Temperatura Actual"}  data={data.temperature.actual} factor={data.temperature.actual * 2.5}/>
         </div>
-        <div className='col-9 my-2'>
+        <div className='col-lg-9 col-sm-12 my-2'>
           <h5>Hoy</h5>
           <Dashboard dia={data.temperature.dia}/>  
         </div>
       </div>
 
 
-      <div className='row'> {/* renglon 2 que contiene la temperatura maxima - minima y el resto de la informacion */}
-        <div className='col-3 text-center my-2'>
+      <div className='row bg-info'> {/* renglon 2 que contiene la temperatura maxima - minima y el resto de la informacion */}
+        <div className='col-lg-3 col-sm-12 text-center my-2'>
           <CardDouble titulo={"Maxima - Minima"}  data={[data.temperature.maxima, data.temperature.minima]} Imagen1={<Soleado />} Imagen2={<Noche />} />
         </div>
-        <div className='col-9'>
+        <div className='col-lg-9 col-sm-12'>
           <div className='row'>
-            <div className='col-4 text-center my-2'>
+            <div className='col-lg-4 text-center my-2'>
               <CardSimple titulo={"Indice UV"} data={data.uvIndice} factor={data.uvIndice/12 * 100}/>
             </div>
-            <div className='col-4 text-center my-2'>
+            <div className='col-lg-4 text-center my-2'>
               <CardSimple titulo={"Estado del viento"} data={data.velocidadViento} factor={data.velocidadViento}/>
             </div>
-            <div className='col-4 text-center my-2'>
+            <div className='col-lg-4 text-center my-2'>
               <CardDouble titulo={"Salida del sol/atardecer"}  data={[data.sunTimes.sunrise, data.sunTimes.sunset]} Imagen1={<Arriba />} Imagen2={<Abajo />} />
             </div>
-            <div className='col-4 text-center my-2'>
+            <div className='col-lg-4 text-center my-2'>
               <CardSimple titulo={"Humedad"}  data={data.humedad} factor={data.humedad} />
             </div>
-            <div className='col-4 text-center my-2'>
+            <div className='col-lg-4 text-center my-2'>
               <CardSimpleTexto titulo={"Visibilidad"}  data={data.visibilidad.valor} descripcion={data.visibilidad.descripcion} />
             </div>
-            <div className='col-4 text-center my-2'>
+            <div className='col-lg-4 text-center my-2'>
               <CardSimpleTexto titulo={"Calidad del Aire"}  data={data.calidadAire.valor} descripcion={data.calidadAire.descripcion}/>
             </div>
           </div>

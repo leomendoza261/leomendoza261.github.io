@@ -18,8 +18,8 @@ const Dashboard = ({ dia }) => {
         label: 'Variación de Temperatura',
         data: temperatura,
         fill: false,
-        backgroundColor: 'white',
-        borderColor: 'white',
+        backgroundColor: '#FFC107',
+        borderColor: '#FFC107',
       },
     ],
   }; 
