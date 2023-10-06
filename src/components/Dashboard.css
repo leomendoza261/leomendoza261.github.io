@@ -1,0 +1,6 @@
+.Dashboard {
+    height: 50vh; /* El 40% de la altura de la pantalla */
+    width: 100%; 
+    padding: 10px; /* Relleno opcional */
+    box-sizing: border-box; /* Asegura que el ancho incluya el borde y el relleno */
+  }

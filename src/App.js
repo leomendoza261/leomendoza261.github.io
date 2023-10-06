@@ -1,6 +1,5 @@
 import React from 'react';
 import Dashboard from "./components/Dashboard";
-/* import Dashboard2 from "./components/Dashboard2"; */
 import CardDouble from './components/CardDouble';
 import CardSimple from './components/CardSimple';
 import CardSimpleTexto from './components/CardSimpleTexto';
@@ -18,7 +17,7 @@ function App() {
         </div>
         <div className='col-9 my-2'>
           <h5>Hoy</h5>
-          <Dashboard data={data.temperature.dia}/>
+          <Dashboard dia={data.temperature.dia}/>  
         </div>
       </div>
 

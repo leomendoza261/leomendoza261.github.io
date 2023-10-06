@@ -1,44 +1,42 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Line } from 'react-chartjs-2';
+import 'chart.js/auto';
+import './Dashboard.css'
 
-const WeatherDashboard = ({ data }) => {
-  const itemsPerPage = 6; // Cantidad de elementos a mostrar por página
-  const [currentPage, setCurrentPage] = useState(1);
+const Dashboard = ({ dia }) => { 
+  // Extraer las horas y temperaturas del objeto dia
+  console.log(dia[0].temperatura)
+  const hora = dia?.map(item => item.hora);
+  const temperatura = dia?.map(item => item.temperatura);
 
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentData = data.slice(startIndex, endIndex);
 
-  const totalPages = Math.ceil(data.length / itemsPerPage);
+  // Configuración del gráfico
+  const data = {
+    labels: hora,
+    datasets: [
+      {
+        label: 'Variación de Temperatura',
+        data: temperatura,
+        fill: false,
+        backgroundColor: 'white',
+        borderColor: 'white',
+      },
+    ],
+  }; 
 
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
+  const options = {
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
   };
 
   return (
-    <div className="weather-dashboard">
-      <div className="row">
-        {currentData.map((item, index) => (
-          <div key={index} className="col-md-4">
-            <div className="hourly-data card mb-4">
-              <div className="card-body">
-                <h5 className="card-title">{item.hora}</h5>
-                <p className="card-text">{item.temperatura} °C</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-      <nav>
-        <ul className="pagination justify-content-center">
-          {Array.from({ length: totalPages }, (_, index) => (
-            <li key={index} className={`page-item ${index + 1 === currentPage ? 'active' : ''}`}>
-              <button className="page-link" onClick={() => handlePageChange(index + 1)}>{index + 1}</button>
-            </li>
-          ))}
-        </ul>
-      </nav>
+    <div className='Dashboard d-flex justify-content-center'>
+      <Line data={data} options={options} />
     </div>
   );
 };
 
-export default WeatherDashboard;
+export default Dashboard;
