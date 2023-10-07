@@ -33,7 +33,7 @@ function App() {
   console.log(weatherData)
 
   if (!weatherData) {
-    return <div>cargando...</div>;
+    return <div className="container-fluid vh-100 bg-info text-white">cargando...</div>;
   }
 
   const weatherCode = weatherData.current_weather.weathercode;
