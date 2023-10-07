@@ -1,10 +1,14 @@
 import React from 'react';
 
 
-const CardSimple = ({ titulo, data, data2 , factor}) => {
+const CardPrincipal = ({ titulo, data, data2, data3, icono, factor}) => {
     return (
         <div className="card bg-transparent border border-0 text-white" >
             <h5>{titulo}</h5>
+            <div className='row'>
+                <img src={icono} alt="" srcset="" height={200} width={200}/>
+                <h6>{data3}</h6>
+            </div>
             <div className='row'>
                 <div className='col-6 align-items-center'>
                     <div className="card-body">
@@ -17,8 +21,9 @@ const CardSimple = ({ titulo, data, data2 , factor}) => {
                     </div>
                 </div>
             </div>
+            
         </div>
     )
 }
 
-export default CardSimple;
+export default CardPrincipal;

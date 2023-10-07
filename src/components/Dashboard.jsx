@@ -3,12 +3,10 @@ import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
 import './Dashboard.css'
 
-const Dashboard = ({ dia }) => { 
+const Dashboard = ({ dia }) => {
   // Extraer las horas y temperaturas del objeto dia
-  console.log(dia[0].temperatura)
-  const hora = dia?.map(item => item.hora);
-  const temperatura = dia?.map(item => item.temperatura);
-
+  const hora = dia.time.map(e => e.substring(11, 13));
+  const temperatura = dia.temperature_2m;
 
   // Configuración del gráfico
   const data = {
@@ -22,7 +20,7 @@ const Dashboard = ({ dia }) => {
         borderColor: '#FFC107',
       },
     ],
-  }; 
+  };
 
   const options = {
     scales: {
