@@ -7,6 +7,7 @@ import CardPrincipal from './components/CardPrincipal';
 import { Soleado, Noche, Arriba, Abajo } from './helpers/icons';
 import obtenerVisibilidad from './helpers/visibilidad';
 import obtenerNivelUV from './helpers/indiceUV';
+import formatearFecha from './helpers/fecha';
 import traduccionClima from "./data/weatherData.json"
 
 
@@ -16,7 +17,7 @@ function App() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m,relativehumidity_2m,weathercode,visibility&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,uv_index_clear_sky_max,precipitation_probability_max,windspeed_10m_max&current_weather=true&timezone=auto&forecast_days=1');
+        const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-28.0632&longitude=-67.5649&hourly=temperature_2m,relativehumidity_2m,weathercode,visibility&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,uv_index_clear_sky_max,precipitation_probability_max,windspeed_10m_max&current_weather=true&timezone=auto&forecast_days=1');
         if (!response.ok) {
           throw new Error('Error en la solicitud a la API');
         }
@@ -42,8 +43,10 @@ function App() {
       <div className='row bg-info'> {/* renglon 1 que contiene la temperatura actual y Dashboard */}
         <div className='col-lg-3 col-sm-12 text-center my-2'>
           <CardPrincipal titulo={"Temperatura Actual"}
+            fecha={formatearFecha(weatherData.current_weather.time.substring(0, 10))}
             data={weatherData.current_weather.temperature}
             data2={weatherData.current_weather_units.temperature}
+            data4={10}
             data3={traduccionClima[weatherCode]?.name} /* aqui quiero que vaya el name */
             icono={traduccionClima[weatherCode]?.image_src}  /* aqui quiero que vaya el image_src */
             factor={weatherData.current_weather.temperature * 2.5}
@@ -81,7 +84,7 @@ function App() {
             </div>
             <div className='col-lg-4 text-center my-2'>
               <CardDouble titulo={"Salida del sol/atardecer"}
-                data={[weatherData.daily.sunrise.map(e => e.substring(11, 13)), weatherData.daily.sunset.map(e => e.substring(11, 13))]}
+                data={[weatherData.daily.sunrise.map(e => e.substring(11, 16)), weatherData.daily.sunset.map(e => e.substring(11, 16))]}
                 data2={["HS", "HS"]}
                 Imagen1={<Arriba />} Imagen2={<Abajo />}
               />
