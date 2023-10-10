@@ -9,10 +9,12 @@ import obtenerVisibilidad from './helpers/visibilidad';
 import obtenerNivelUV from './helpers/indiceUV';
 import formatearFecha from './helpers/fecha';
 import traduccionClima from "./data/weatherData.json"
+import obtenerCalidadAire from './helpers/european_AQI';
 
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
+  const [airQuality, setAirQuality] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -27,10 +29,25 @@ function App() {
         console.error('Error fetching data:', error);
       }
     }
+    async function fetchAirQuality() {
+      try {
+        const response = await fetch('https://air-quality-api.open-meteo.com/v1/air-quality?latitude=-28.0632&longitude=-67.5649&current=european_aqi&forecast_days=1');
+        if (!response.ok) {
+          throw new Error('Error en la solicitud a la API');
+        }
+        const data = await response.json();
+        setAirQuality(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
     fetchData();
+    fetchAirQuality();
+
   }, []);
 
   console.log(weatherData)
+  console.log(airQuality)
 
   if (!weatherData) {
     return <div className="container-fluid vh-100 bg-info text-white">cargando...</div>;
@@ -103,8 +120,8 @@ function App() {
             </div>
             <div className='col-lg-4 text-center my-2'>
               <CardSimpleTexto titulo={"Calidad del Aire"}
-                data={10}
-                descripcion={"como Messi"}
+                data={airQuality.current.european_aqi}
+                descripcion={obtenerCalidadAire(airQuality.current.european_aqi)}
               />
             </div>
           </div>
