@@ -48,12 +48,12 @@ function App() {
 
   console.log(weatherData)
   console.log(airQuality)
-
-  if (!weatherData) {
+  
+  if (!weatherData || !airQuality) {
     return <div className="container-fluid vh-100 bg-info text-white">cargando...</div>;
   }
-
-  const weatherCode = weatherData.current_weather.weathercode;
+  
+  const weatherCode = weatherData.current_weather.weathercode; /* esta linea la utilizo para la traduccion del clima */
 
   return (
     <div className="container-fluid vh-100 bg-info text-white">
