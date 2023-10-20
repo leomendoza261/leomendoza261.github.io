@@ -25,7 +25,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #000000;
 }
 
 @keyframes App-logo-spin {
@@ -35,4 +35,9 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.leaflet-container {
+  width: 100wh; 
+  height: 100vh;
 }

@@ -10,11 +10,13 @@ import obtenerNivelUV from './helpers/indiceUV';
 import formatearFecha from './helpers/fecha';
 import traduccionClima from "./data/weatherData.json"
 import obtenerCalidadAire from './helpers/european_AQI';
+import Transporte from './components/Transporte';
 
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [airQuality, setAirQuality] = useState(null);
+  const [transportData, setTransportData] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -41,19 +43,38 @@ function App() {
         console.error('Error fetching data:', error);
       }
     }
+    async function fetchTransportData() {
+      try {
+        const response = await fetch('https://apitransporte.buenosaires.gob.ar/colectivos/vehiclePositionsSimple?client_id=cb6b18c84b3b484d98018a791577af52&client_secret=3e3DB105Fbf642Bf88d5eeB8783EE1E6');
+        if (!response.ok) {
+          throw new Error('Error en la solicitud a la API');
+        }
+        const data = await response.json();
+        setTransportData(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
     fetchData();
     fetchAirQuality();
-
+    fetchTransportData();
   }, []);
 
-  console.log(weatherData)
-  console.log(airQuality)
-  
-  if (!weatherData || !airQuality) {
-    return <div className="container-fluid vh-100 bg-info text-white">cargando...</div>;
+  console.log(transportData)
+
+  if (!weatherData || !airQuality || !transportData) {
+    return (
+      <div className="container-fluid vh-100 bg-info text-white">
+        <span className="fs-4">Cargando...</span> 
+        <div class="spinner-border text-light" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    )
   }
-  
+
   const weatherCode = weatherData.current_weather.weathercode; /* esta linea la utilizo para la traduccion del clima */
+
 
   return (
     <div className="container-fluid vh-100 bg-info text-white">
@@ -70,7 +91,7 @@ function App() {
           />
         </div>
         <div className='col-lg-9 col-sm-12 text-center my-2'>
-          <h5>Hoy</h5>
+          <h5 >Hoy</h5>
           <Dashboard dia={weatherData.hourly} />
         </div>
       </div>
@@ -125,6 +146,18 @@ function App() {
               />
             </div>
           </div>
+        </div>
+      </div>
+      <div className='row bg-info vh-100'>
+        <div className='col-lg-3 col-sm-12 text-center my-2'>
+          <div class="list-group" style={{ maxHeight: '97vh', overflowY: 'auto' }}>
+            {transportData.map((item, index) => (
+              <a key={index} class="list-group-item list-group-item-action" href={item.id}>Linea {item.agency_id} {item.route_short_name} {item.trip_headsign}</a>
+            ))}
+          </div>
+        </div>
+        <div className='col-lg-9 col-sm-12 text-center my-2'>
+          <Transporte data={transportData} />
         </div>
       </div>
     </div>
