@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from 'react';
+/* import React, { useState, useEffect } from 'react'; */
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
-import L from "leaflet"; // Asegúrate de importar la librería 'leaflet'
+import L from "leaflet";
 import 'leaflet/dist/leaflet.css';
+import dataTransporte from "../data/DataTransporte.json"
 
 
 const Transporte = () => {
     const customIcon = new L.Icon({
-        iconUrl: require("../images/soleado.png"), // Reemplaza con la ruta a tu imagen personalizada
-        iconSize: [32, 32], // Tamaño del icono [ancho, alto]
-        iconAnchor: [16, 32], // Punto de anclaje del icono (punto inferior central)
+        iconUrl: require("../images/bus.png"),
+        iconSize: [32, 32],
+        iconAnchor: [16, 32],
     });
 
-    const [transportData, setTransportData] = useState(null);
+    /* const [transportData, setTransportData] = useState(null);
 
     useEffect(() => {
         async function fetchTransportData() {
@@ -23,7 +24,7 @@ const Transporte = () => {
                 const data = await response.json();
                 setTransportData(data);
             } catch (error) {
-                console.error('Error fetching data:', error);
+                console.error('Error fetching data: que culiao', error);
             }
         }
         fetchTransportData();
@@ -51,13 +52,17 @@ const Transporte = () => {
                 </div>
             </div>
         )
-    }
+    } */
 
     return (
         <div className='row bg-info vh-100'>
             <div className='col-lg-3 col-sm-12 text-center my-2'>
-                <div class="list-group" style={{ maxHeight: '97vh', overflowY: 'auto' }}>
-                    {transportData.map((item, index) => (
+                <form class="d-flex mb-1" role="search">
+                    <input class="form-control bg-info text-white me-1" type="search" aria-label="Search"/>
+                    <button class="btn btn-outline-light" type="submit">Buscar</button>
+                </form>
+                <div class="list-group" style={{ maxHeight: '91vh', overflowY: 'auto' }}>
+                    {dataTransporte.map((item, index) => (
                         <a key={index} class="list-group-item list-group-item-action" href={item.id}>Linea {item.agency_id} {item.route_short_name} {item.trip_headsign}</a>
                     ))}
                 </div>
@@ -68,7 +73,7 @@ const Transporte = () => {
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    {transportData.map((item, index) => (
+                    {dataTransporte.map((item, index) => (
                         <Marker key={index} position={[item.latitude, item.longitude]} icon={customIcon} >
                             <Popup>
                                 <p>Bus ID: {item.id}</p>
