@@ -1,4 +1,4 @@
-/* import React, { useState, useEffect } from 'react'; */
+import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 import L from "leaflet";
 import 'leaflet/dist/leaflet.css';
@@ -11,6 +11,17 @@ const Transporte = () => {
         iconSize: [32, 32],
         iconAnchor: [16, 32],
     });
+
+    const [searchText, setSearchText] = useState('');
+    const [filteredData, setFilteredData] = useState(dataTransporte);
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        const filtered = dataTransporte.filter((item) =>
+            item.route_short_name.includes(searchText)
+        );
+        setFilteredData(filtered);
+    };
 
     /* const [transportData, setTransportData] = useState(null);
 
@@ -55,39 +66,71 @@ const Transporte = () => {
     } */
 
     return (
-        <div className='row bg-info vh-100'>
-            <div className='col-lg-3 col-sm-12 text-center my-2'>
-                <form class="d-flex mb-1" role="search">
-                    <input class="form-control bg-info text-white me-1" type="search" aria-label="Search"/>
-                    <button class="btn btn-outline-light" type="submit">Buscar</button>
-                </form>
-                <div class="list-group" style={{ maxHeight: '91vh', overflowY: 'auto' }}>
-                    {dataTransporte.map((item, index) => (
-                        <a key={index} class="list-group-item list-group-item-action" href={item.id}>Linea {item.agency_id} {item.route_short_name} {item.trip_headsign}</a>
-                    ))}
-                </div>
-            </div>
-            <div className='col-lg-9 col-sm-12 text-center my-2'>
-                <MapContainer center={[-34.60, -58.38]} zoom={12} scrollWheelZoom={false} style={{ height: "900px", width: "100%" }}>
-                    <TileLayer
-                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                    {dataTransporte.map((item, index) => (
-                        <Marker key={index} position={[item.latitude, item.longitude]} icon={customIcon} >
-                            <Popup>
-                                <p>Bus ID: {item.id}</p>
-                                <p>Route ID: {item.route_id}</p>
-                                <p>Agencia: {item.agency_name}</p>
-                                <p>Agencia ID: {item.agency_id}</p>
-                                <p>Speed: {item.speed}</p>
-                                <p>Timestamp: {item.timestamp}</p>
-                            </Popup>
-                        </Marker>
-                    ))}
-                </MapContainer>
-            </div>
+        <div className="row bg-info vh-100">
+      <div className="col-lg-3 col-sm-12 text-center my-2">
+        {/* Formulario de búsqueda */}
+        <form className="d-flex mb-1" role="search" onSubmit={handleSearch}>
+          <input
+            className="form-control bg-info text-white me-1"
+            type="search"
+            aria-label="Search"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+          <button className="btn btn-outline-light" type="submit">
+            Buscar
+          </button>
+        </form>
+
+        {/* Lista de resultados de búsqueda */}
+        <div
+          className="list-group"
+          style={{ maxHeight: '91vh', overflowY: 'auto' }}
+        >
+          {filteredData.map((item, index) => (
+            <a
+              key={index}
+              className="list-group-item list-group-item-action"
+              href={item.id}
+            >
+              Linea {item.agency_id} {item.route_short_name} {item.trip_headsign}
+            </a>
+          ))}
         </div>
+      </div>
+      <div className="col-lg-9 col-sm-12 text-center my-2">
+        {/* Mapa */}
+        <MapContainer
+          center={[-34.60, -58.38]}
+          zoom={12}
+          scrollWheelZoom={false}
+          style={{ height: '900px', width: '100%' }}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+
+          {/* Marcadores en el mapa */}
+          {filteredData.map((item, index) => (
+            <Marker
+              key={index}
+              position={[item.latitude, item.longitude]}
+              icon={customIcon}
+            >
+              <Popup>
+                <p>Bus ID: {item.id}</p>
+                <p>Route ID: {item.route_id}</p>
+                <p>Agencia: {item.agency_name}</p>
+                <p>Agencia ID: {item.agency_id}</p>
+                <p>Speed: {item.speed}</p>
+                <p>Timestamp: {item.timestamp}</p>
+              </Popup>
+            </Marker>
+          ))}
+        </MapContainer>
+      </div>
+    </div>
 
     )
 }
