@@ -12,9 +12,7 @@ const Transporte = (data) => {
         iconAnchor: [16, 32], // Punto de anclaje del icono (punto inferior central)
     });
 
-    if (!data) {
-        return <div className="container-fluid vh-100 bg-info text-white">cargando...</div>;
-    }
+    
 
     return (
         <div>
