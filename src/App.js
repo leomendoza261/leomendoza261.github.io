@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+/* import React, { useState, useEffect } from 'react'; */
 
 import Transporte from './components/Transporte';
 import Clima from './components/Clima';
-import dataTransporte from "./data/DataTransporte.json"
+/* import dataTransporte from "./data/DataTransporte.json" */
 
 
 function App() {
-  const [weatherData, setWeatherData] = useState(null);
+  /* const [weatherData, setWeatherData] = useState(null);
   const [airQuality, setAirQuality] = useState(null);
   const [transportData, setTransportData] = useState(null);
 
@@ -52,38 +52,22 @@ function App() {
     fetchTransportData();
   }, []);
 
-  console.log(transportData)
 
   if (!weatherData || !airQuality) {
     return (
       <div className="container-fluid vh-100 bg-info text-white">
-        <span className="fs-4">Cargando...</span> 
+        <span className="fs-4">Cargando...</span>
         <div class="spinner-border text-light" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
       </div>
     )
-  }
-
-
+  } */
 
   return (
     <div className="container-fluid vh-100 bg-info text-white">
-      <Clima weatherData={weatherData} airQuality={airQuality}/>
-      <div className='row bg-info vh-100'>
-        <div className='col-lg-3 col-sm-12 text-center my-2'>
-          <div class="list-group" style={{ maxHeight: '97vh', overflowY: 'auto'}}>
-            {dataTransporte.map((item, index) => (
-              <a key={index} class="list-group-item list-group-item-action" href={item.id}>Linea {item.agency_id} {item.route_short_name} {item.trip_headsign}</a>
-            ))}
-          </div>
-        </div>
-        <div className='col-lg-9 col-sm-12 text-center my-2'>
-          <Transporte data={dataTransporte} />
-        </div>
-      </div>
-
-      
+      <Clima /* weatherData={weatherData} airQuality={airQuality} *//>  
+      <Transporte/>
     </div>
   );
 }
