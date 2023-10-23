@@ -134,7 +134,7 @@
     "id": "1836",
     "direction": 0,
     "agency_name": "MICROOMNIBUS SAAVEDRA S.A.T.A.C.I.",
-    "agency_id": 82,
+    "agency_id": 11,
     "route_short_name": "153A",
     "tip_id": "95448-1",
     "trip_headsign": "a B° Nuevo"
@@ -148,7 +148,7 @@
     "id": "1838",
     "direction": 1,
     "agency_name": "MICROOMNIBUS SAAVEDRA S.A.T.A.C.I.",
-    "agency_id": 82,
+    "agency_id": 11,
     "route_short_name": "321A",
     "tip_id": "95364-1",
     "trip_headsign": "a Est. CASTELAR"
@@ -162,7 +162,7 @@
     "id": "1849",
     "direction": 0,
     "agency_name": "MICROOMNIBUS SAAVEDRA S.A.T.A.C.I.",
-    "agency_id": 82,
+    "agency_id": 11,
     "route_short_name": "321A",
     "tip_id": "95316-1",
     "trip_headsign": "a LIBERTAD"
@@ -176,7 +176,7 @@
     "id": "1822",
     "direction": 0,
     "agency_name": "MICROOMNIBUS SAAVEDRA S.A.T.A.C.I.",
-    "agency_id": 82,
+    "agency_id": 22,
     "route_short_name": "153A",
     "tip_id": "95449-1",
     "trip_headsign": "a B° Nuevo"
@@ -190,7 +190,7 @@
     "id": "1827",
     "direction": 0,
     "agency_name": "MICROOMNIBUS SAAVEDRA S.A.T.A.C.I.",
-    "agency_id": 82,
+    "agency_id": 22,
     "route_short_name": "253A",
     "tip_id": "95220-1",
     "trip_headsign": "a Liniers"
@@ -204,7 +204,7 @@
     "id": "1833",
     "direction": 0,
     "agency_name": "MICROOMNIBUS SAAVEDRA S.A.T.A.C.I.",
-    "agency_id": 82,
+    "agency_id": 22,
     "route_short_name": "153A",
     "tip_id": "95446-1",
     "trip_headsign": "a B° Nuevo"
@@ -218,7 +218,7 @@
     "id": "1836",
     "direction": 0,
     "agency_name": "MICROOMNIBUS SAAVEDRA S.A.T.A.C.I.",
-    "agency_id": 82,
+    "agency_id": 67,
     "route_short_name": "153A",
     "tip_id": "95448-1",
     "trip_headsign": "a B° Nuevo"
@@ -232,7 +232,7 @@
     "id": "1838",
     "direction": 1,
     "agency_name": "MICROOMNIBUS SAAVEDRA S.A.T.A.C.I.",
-    "agency_id": 82,
+    "agency_id": 67,
     "route_short_name": "321A",
     "tip_id": "95364-1",
     "trip_headsign": "a Est. CASTELAR"
@@ -246,7 +246,7 @@
     "id": "1849",
     "direction": 0,
     "agency_name": "MICROOMNIBUS SAAVEDRA S.A.T.A.C.I.",
-    "agency_id": 82,
+    "agency_id": 67,
     "route_short_name": "321A",
     "tip_id": "95316-1",
     "trip_headsign": "a LIBERTAD"
