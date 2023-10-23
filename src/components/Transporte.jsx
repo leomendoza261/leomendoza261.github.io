@@ -35,7 +35,7 @@ const Transporte = () => {
 
     const mapRef = React.createRef();
 
-    /* const [transportData, setTransportData] = useState(null);
+    const [transportData, setTransportData] = useState(null);
 
     useEffect(() => {
         async function fetchTransportData() {
@@ -47,13 +47,14 @@ const Transporte = () => {
                 const data = await response.json();
                 setTransportData(data);
             } catch (error) {
-                console.error('Error fetching data: que culiao', error);
+                console.error('Error fetching data:', error);
             }
         }
         fetchTransportData();
     }, []);
 
-    if (!transportData) {
+    console.log(transportData)
+    /* if (!transportData) {
         return (
             <div className='row bg-info vh-100'>
                 <div className='col-lg-3 col-sm-12 text-center my-2'>
@@ -78,7 +79,7 @@ const Transporte = () => {
     } */
 
     return (
-        <div className="row bg-info vh-100">
+        <div className="row bg-info">
             <div className="col-lg-3 col-sm-12 text-center my-2">
                 <form className="d-flex mb-1" role="search" onSubmit={handleSearch}>
                     <input
@@ -88,7 +89,7 @@ const Transporte = () => {
                         value={searchText}
                         onChange={(e) => setSearchText(e.target.value)}
                     />
-                    <button className="btn btn-outline-light" type="submit">
+                    <button className="btn btn-warning text-white " type="submit">
                         Buscar
                     </button>
                 </form>
@@ -96,18 +97,18 @@ const Transporte = () => {
                     {filteredData.map((item, index) => (
                         <button
                             key={index}
-                            className="list-group-item list-group-item-action"
+                            className=" btn btn-outline-warning text-white"
                             href={item.id}
                             onClick={() => handleBusClick(item)}
                         >
-                            Linea {item.agency_id} {item.route_short_name} {item.trip_headsign}
+                            <span className=''>Linea {item.agency_id} </span>{item.route_short_name} {item.trip_headsign}
                         </button>
                     ))}
                 </div>
             </div>
             <div className="col-lg-9 col-sm-12 text-center my-2">
                 <MapContainer
-                    ref={mapRef} // Asignar la ref para acceder al objeto MapContainer
+                    ref={mapRef}
                     center={[-34.60, -58.38]}
                     zoom={12}
                     scrollWheelZoom={false}
