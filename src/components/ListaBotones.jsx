@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function App({ data }) {
+function App({ data, onBusClick}) {
 
     const [buses, setBuses] = useState(data);
     const [agencies, setAgencies] = useState([]);
@@ -49,7 +49,12 @@ function App({ data }) {
             {/* Lista de autobuses filtrada */}
             <div className="list-group" style={{ maxHeight: '91vh', overflowY: 'auto' }}>
                 {filteredBusesByDestination.map((bus) => (
-                    <button key={bus.id} className=" btn btn-outline-warning text-white" onClick={() => console.log([bus.latitude, bus.longitude])}> Linea {bus.agency_id} {bus.route_short_name} {bus.trip_headsign}</button>
+                    <button key={bus.id}
+                        className=" btn btn-outline-warning text-white"
+                        onClick={() => onBusClick(bus)}
+                    >
+                        Linea {bus.agency_id} {bus.route_short_name} {bus.trip_headsign}
+                    </button>
                 ))}
             </div>
         </div>

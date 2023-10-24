@@ -70,7 +70,7 @@ const Transporte = () => {
     return (
         <div className="row bg-info">
             <div className="col-lg-3 col-sm-12 text-center my-2">
-                <ListaBotones data={dataTransporte} />
+                <ListaBotones data={filteredBusesByDsestination} onBusClick={handleBusClick}/>
             </div>
             <div className="col-lg-9 col-sm-12 text-center my-2">
                 <MapContainer
