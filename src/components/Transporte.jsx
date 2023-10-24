@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
+import ListaBotones from './ListaBotones';
 import L from "leaflet";
 import 'leaflet/dist/leaflet.css';
 import dataTransporte from "../data/DataTransporte.json"
@@ -12,30 +13,18 @@ const Transporte = () => {
         iconAnchor: [16, 32],
     });
 
-    const [searchText, setSearchText] = useState('');
-    const [filteredData, setFilteredData] = useState(dataTransporte);
-    const [selectedBus, setSelectedBus] = useState(null);
-
-    const handleSearch = (e) => {
-        e.preventDefault();
-        const filtered = dataTransporte.filter((item) =>
-            item.route_short_name.includes(searchText)
-        );
-        setFilteredData(filtered);
-        setSelectedBus(null);
-    };
+    const filteredBusesByDsestination = dataTransporte
 
     const handleBusClick = (bus) => {
-        setSelectedBus(bus);
         if (bus) {
             const { latitude, longitude } = bus;
-            mapRef.current.setView([latitude, longitude], 15); 
+            mapRef.current.setView([latitude, longitude], 15);
         }
     };
 
     const mapRef = React.createRef();
 
-    const [transportData, setTransportData] = useState(null);
+    /* const [transportData, setTransportData] = useState(null);
 
     useEffect(() => {
         async function fetchTransportData() {
@@ -53,7 +42,7 @@ const Transporte = () => {
         fetchTransportData();
     }, []);
 
-    console.log(transportData)
+    console.log(transportData) */
     /* if (!transportData) {
         return (
             <div className='row bg-info vh-100'>
@@ -81,30 +70,7 @@ const Transporte = () => {
     return (
         <div className="row bg-info">
             <div className="col-lg-3 col-sm-12 text-center my-2">
-                <form className="d-flex mb-1" role="search" onSubmit={handleSearch}>
-                    <input
-                        className="form-control bg-info text-white me-1"
-                        type="search"
-                        aria-label="Search"
-                        value={searchText}
-                        onChange={(e) => setSearchText(e.target.value)}
-                    />
-                    <button className="btn btn-warning text-white " type="submit">
-                        Buscar
-                    </button>
-                </form>
-                <div className="list-group" style={{ maxHeight: '91vh', overflowY: 'auto' }}>
-                    {filteredData.map((item, index) => (
-                        <button
-                            key={index}
-                            className=" btn btn-outline-warning text-white"
-                            href={item.id}
-                            onClick={() => handleBusClick(item)}
-                        >
-                            <span className=''>Linea {item.agency_id} </span>{item.route_short_name} {item.trip_headsign}
-                        </button>
-                    ))}
-                </div>
+                <ListaBotones data={dataTransporte} />
             </div>
             <div className="col-lg-9 col-sm-12 text-center my-2">
                 <MapContainer
@@ -118,7 +84,7 @@ const Transporte = () => {
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    {filteredData.map((item, index) => (
+                    {filteredBusesByDsestination.map((item, index) => (
                         <Marker
                             key={index}
                             position={[item.latitude, item.longitude]}
