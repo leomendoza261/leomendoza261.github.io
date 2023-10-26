@@ -13,8 +13,7 @@ const Transporte = () => {
         iconAnchor: [16, 32],
     });
 
-    const filteredBusesByDsestination = dataTransporte
-
+    
     const handleBusClick = (bus) => {
         if (bus) {
             const { latitude, longitude } = bus;
@@ -24,26 +23,31 @@ const Transporte = () => {
 
     const mapRef = React.createRef();
 
-    /* const [transportData, setTransportData] = useState(null);
+
+    const [transportData, setTransportData] = useState(null);
+    const [route, setRoute] = useState(22)
 
     useEffect(() => {
         async function fetchTransportData() {
             try {
-                const response = await fetch('https://apitransporte.buenosaires.gob.ar/colectivos/vehiclePositionsSimple?client_id=cb6b18c84b3b484d98018a791577af52&client_secret=3e3DB105Fbf642Bf88d5eeB8783EE1E6');
+                const response = await fetch(`https://datosabiertos-transporte-apis.buenosaires.gob.ar:443/colectivos/vehiclePositionsSimple?route_id=${route}&client_id=cb6b18c84b3b484d98018a791577af52&client_secret=3e3DB105Fbf642Bf88d5eeB8783EE1E6`);
                 if (!response.ok) {
                     throw new Error('Error en la solicitud a la API');
                 }
                 const data = await response.json();
                 setTransportData(data);
+                console.log(transportData)
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         }
         fetchTransportData();
-    }, []);
+    }, [route]);
 
-    console.log(transportData) */
-    /* if (!transportData) {
+    
+
+
+    if (!transportData) {
         return (
             <div className='row bg-info vh-100'>
                 <div className='col-lg-3 col-sm-12 text-center my-2'>
@@ -65,12 +69,14 @@ const Transporte = () => {
                 </div>
             </div>
         )
-    } */
+    }
+
+    console.log(transportData)
 
     return (
         <div className="row bg-info">
             <div className="col-lg-3 col-sm-12 text-center my-2">
-                <ListaBotones data={filteredBusesByDsestination} onBusClick={handleBusClick}/>
+                <ListaBotones data={transportData} onBusClick={handleBusClick} setRoute={setRoute}/>
             </div>
             <div className="col-lg-9 col-sm-12 text-center my-2">
                 <MapContainer
@@ -84,7 +90,7 @@ const Transporte = () => {
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    {filteredBusesByDsestination.map((item, index) => (
+                    {transportData.map((item, index) => (
                         <Marker
                             key={index}
                             position={[item.latitude, item.longitude]}

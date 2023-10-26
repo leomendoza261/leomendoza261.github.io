@@ -1,36 +1,28 @@
 import React, { useState, useEffect } from "react";
 
-function App({ data, onBusClick}) {
+function ListaBotones({ data, onBusClick, setRoute }) {
 
-    const [buses, setBuses] = useState(data);
     const [agencies, setAgencies] = useState([]);
-    const [selectedAgency, setSelectedAgency] = useState("All");
+    const [selectedAgency, setSelectedAgency] = useState(45);
     const [searchDestination, setSearchDestination] = useState("");
+    
 
     useEffect(() => {
-        // Recopila todos los agency_id de autobuses sin repetir
-        const uniqueAgencies = [...new Set(buses.map((bus) => bus.agency_id))];
-        setAgencies(["All", ...uniqueAgencies]);
-    }, [buses]);
+        setAgencies([NaN,82,47, 39, 51]);
+    }, [data]);
 
-    // Filtra la lista de autobuses según el agency_id seleccionado
-    const filteredBuses = selectedAgency === "All"
-        ? buses
-        : buses.filter((bus) => parseInt(bus.agency_id, 10) === parseInt(selectedAgency, 10));
-
-    // Filtra la lista de autobuses por destino
-    const filteredBusesByDestination = filteredBuses.filter(
-        (bus) => bus.trip_headsign.toLowerCase().includes(searchDestination.toLowerCase())
-    );
+    const handleRouteChange = (event) => {
+        setRoute(parseInt(event.target.value));
+    };
 
     return (
         <div>
             <div className="d-flex mb-1">
                 {/* Dropdown para seleccionar el agency_id */}
-                <select className="btn btn-info border-white text-white me-1" value={selectedAgency} onChange={(e) => setSelectedAgency(e.target.value)}>
-                    {agencies.map((agencyId) => (
-                        <option class="btn btn-warning" key={agencyId} value={agencyId}>
-                            {agencyId}
+                <select className="btn btn-info border-white text-white me-1" value={selectedAgency} onChange={handleRouteChange}>
+                    {agencies.map((route) => (
+                        <option class="btn btn-warning" key={route} value={route}>
+                            {parseInt(route)}
                         </option>
                     ))}
                 </select>
@@ -48,12 +40,12 @@ function App({ data, onBusClick}) {
 
             {/* Lista de autobuses filtrada */}
             <div className="list-group" style={{ maxHeight: '91vh', overflowY: 'auto' }}>
-                {filteredBusesByDestination.map((bus) => (
+                {data.map((bus) => (
                     <button key={bus.id}
                         className=" btn btn-outline-warning text-white"
                         onClick={() => onBusClick(bus)}
                     >
-                        Linea {bus.agency_id} {bus.route_short_name} {bus.trip_headsign}
+                        <span className="text-danger fs-6"> Linea {bus.route_id}</span> {bus.trip_headsign}
                     </button>
                 ))}
             </div>
@@ -61,4 +53,4 @@ function App({ data, onBusClick}) {
     );
 }
 
-export default App;
+export default ListaBotones;
