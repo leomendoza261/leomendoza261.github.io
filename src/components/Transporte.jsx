@@ -3,7 +3,6 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 import ListaBotones from './ListaBotones';
 import L from "leaflet";
 import 'leaflet/dist/leaflet.css';
-import dataTransporte from "../data/DataTransporte.json"
 
 
 const Transporte = () => {
