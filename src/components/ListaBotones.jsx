@@ -8,7 +8,7 @@ function ListaBotones({ data, onBusClick, setRoute }) {
     
 
     useEffect(() => {
-        setAgencies([NaN,82,47, 39, 51]);
+        setAgencies([NaN, 82, 22, 39, 51]);
     }, [data]);
 
     const handleRouteChange = (event) => {
@@ -22,7 +22,7 @@ function ListaBotones({ data, onBusClick, setRoute }) {
                 <select className="btn btn-info border-white text-white me-1" value={selectedAgency} onChange={handleRouteChange}>
                     {agencies.map((route) => (
                         <option class="btn btn-warning" key={route} value={route}>
-                            {parseInt(route)}
+                            {route === NaN ? "Rutas" : parseInt(route)}
                         </option>
                     ))}
                 </select>
@@ -45,7 +45,7 @@ function ListaBotones({ data, onBusClick, setRoute }) {
                         className=" btn btn-outline-warning text-white"
                         onClick={() => onBusClick(bus)}
                     >
-                        <span className="text-danger fs-6"> Linea {bus.route_id}</span> {bus.trip_headsign}
+                        Linea <span className="fw-bold">{bus.route_id}</span> - Destino <span className="fw-bold">{bus.trip_headsign}</span>
                     </button>
                 ))}
             </div>

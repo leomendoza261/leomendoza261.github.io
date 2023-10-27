@@ -25,7 +25,7 @@ const Transporte = () => {
 
 
     const [transportData, setTransportData] = useState(null);
-    const [route, setRoute] = useState(22)
+    const [route, setRoute] = useState(82)
 
     useEffect(() => {
         async function fetchTransportData() {
@@ -103,6 +103,7 @@ const Transporte = () => {
                                 <p>Agencia ID: {item.agency_id}</p>
                                 <p>Speed: {item.speed}</p>
                                 <p>Timestamp: {item.timestamp}</p>
+                                <p>Direccion: {item.direction}</p>
                             </Popup>
                         </Marker>
                     ))}
