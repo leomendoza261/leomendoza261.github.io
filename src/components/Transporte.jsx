@@ -119,13 +119,6 @@ const Transporte = () => {
 
     datosFiltrados.sort(customComparator)
 
-
-
-    console.log(datosFiltrados)
-
-    
-        
-
     return (
         <div className="row bg-info">
             <div className="col-lg-3 col-sm-12 text-center my-2">
