@@ -21,7 +21,7 @@ function ListaBotones({ data, onBusClick, setRoute, valor }) {
                     <option class="btn btn-warning">Rutas</option>
                     {valor.map((e) => (
                         <option class="btn btn-warning" key={e} value={e.route_id}>
-                            {parseInt(e.route_short_name)}
+                            {e.route_short_name}
                         </option>
                     ))}
                 </select>
@@ -44,7 +44,7 @@ function ListaBotones({ data, onBusClick, setRoute, valor }) {
                         className=" btn btn-outline-warning text-white"
                         onClick={() => onBusClick(bus)}
                     >
-                        Linea <span className="fw-bold">{bus.route_id}</span> - Destino <span className="fw-bold">{bus.trip_headsign}</span>
+                        {/* Linea <span className="fw-bold">{bus.route_id}</span> -  */}Destino <span className="fw-bold">{bus.trip_headsign}</span>
                     </button>
                 ))}
             </div>

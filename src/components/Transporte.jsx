@@ -85,6 +85,47 @@ const Transporte = () => {
         }
     });
 
+    function customComparator(a, b) {
+        const routeShortNameA = a.route_short_name;
+        const routeShortNameB = b.route_short_name;
+       
+        const segmentsA = routeShortNameA.match(/\d+|[a-zA-Z]+/g);
+        const segmentsB = routeShortNameB.match(/\d+|[a-zA-Z]+/g);
+       
+        for (let i = 0; i < Math.min(segmentsA.length, segmentsB.length); i++) {
+          const isNumberA = !isNaN(segmentsA[i]);
+          const isNumberB = !isNaN(segmentsB[i]);
+       
+          if (isNumberA && isNumberB) {
+            const diff = Number(segmentsA[i]) - Number(segmentsB[i]);
+            if (diff !== 0) {
+              return diff;
+            }
+          } else if (isNumberA) {
+            return -1;
+          } else if (isNumberB) {
+            return 1;
+          } else {
+            const comparison = segmentsA[i].localeCompare(segmentsB[i]);
+            if (comparison !== 0) {
+              return comparison;
+            }
+          }
+        }
+       
+        return segmentsA.length - segmentsB.length;
+      }
+
+
+    datosFiltrados.sort(customComparator)
+
+
+
+    console.log(datosFiltrados)
+
+    
+        
+
     return (
         <div className="row bg-info">
             <div className="col-lg-3 col-sm-12 text-center my-2">
