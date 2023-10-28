@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 import ListaBotones from './ListaBotones';
 import L from "leaflet";
 import 'leaflet/dist/leaflet.css';
+import data from "../data/DataTransporte.json"
 
 
 const Transporte = () => {
@@ -12,7 +13,7 @@ const Transporte = () => {
         iconAnchor: [16, 32],
     });
 
-    
+
     const handleBusClick = (bus) => {
         if (bus) {
             const { latitude, longitude } = bus;
@@ -43,7 +44,6 @@ const Transporte = () => {
         fetchTransportData();
     }, [route]);
 
-    
 
 
     if (!transportData) {
@@ -72,10 +72,23 @@ const Transporte = () => {
 
     console.log(transportData)
 
+
+    const datosFiltrados = [];
+    const rutasNombres = {};
+    const idNombres = {};
+
+    data.map((e) => {
+        if (!rutasNombres[e.route_short_name] && !idNombres[e.id]) {
+            rutasNombres[e.route_short_name] = true;
+            idNombres[e.id] = true;
+            datosFiltrados.push(e);
+        }
+    });
+
     return (
         <div className="row bg-info">
             <div className="col-lg-3 col-sm-12 text-center my-2">
-                <ListaBotones data={transportData} onBusClick={handleBusClick} setRoute={setRoute}/>
+                <ListaBotones data={transportData} onBusClick={handleBusClick} setRoute={setRoute} valor={datosFiltrados}/>
             </div>
             <div className="col-lg-9 col-sm-12 text-center my-2">
                 <MapContainer
@@ -99,6 +112,7 @@ const Transporte = () => {
                                 <p>Bus ID: {item.id}</p>
                                 <p>Route ID: {item.route_id}</p>
                                 <p>Agencia: {item.agency_name}</p>
+                                <p>Route short name: {item.route_short_name}</p>
                                 <p>Agencia ID: {item.agency_id}</p>
                                 <p>Speed: {item.speed}</p>
                                 <p>Timestamp: {item.timestamp}</p>

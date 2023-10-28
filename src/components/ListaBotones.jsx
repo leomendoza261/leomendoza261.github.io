@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-function ListaBotones({ data, onBusClick, setRoute }) {
+function ListaBotones({ data, onBusClick, setRoute, valor }) {
 
     const [agencies, setAgencies] = useState([]);
     const [searchDestination, setSearchDestination] = useState("");
     
     useEffect(() => {
-        setAgencies([82, 22, 39, 51]);
+        setAgencies([1]);
     }, [data]);
 
     const handleRouteChange = (event) => {
@@ -19,9 +19,9 @@ function ListaBotones({ data, onBusClick, setRoute }) {
                 {/* Dropdown para seleccionar el agency_id */}
                 <select className="btn btn-info border-white text-white me-1" value={agencies} onChange={handleRouteChange}>
                     <option class="btn btn-warning">Rutas</option>
-                    {agencies.map((route) => (
-                        <option class="btn btn-warning" key={route} value={route}>
-                            {parseInt(route)}
+                    {valor.map((e) => (
+                        <option class="btn btn-warning" key={e} value={e.route_id}>
+                            {parseInt(e.route_short_name)}
                         </option>
                     ))}
                 </select>
