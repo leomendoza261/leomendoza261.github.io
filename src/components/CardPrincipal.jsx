@@ -17,7 +17,6 @@ const CardPrincipal = ({ titulo, fecha, data, data2, data3, data4, icono, factor
                 }
                 const data = await response.json();
                 setCiudades(data);
-                console.log(ciudades)
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
