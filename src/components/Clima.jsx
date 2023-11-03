@@ -15,11 +15,23 @@ import obtenerCalidadAire from '../helpers/european_AQI';
 const Clima = () => {
     const [weatherData, setWeatherData] = useState(null);
     const [airQuality, setAirQuality] = useState(null);
+    const [ubicacion, setUbicacion] = useState("Tinogasta");
+    const [cityCoordinates, setCityCoordinates] = useState({ latitude: -28.0632, longitude: -67.5649 });
+
+    const handleCitySearch = (latitude, longitude) => { 
+        setCityCoordinates({ latitude, longitude });
+        // Luego, realiza la solicitud de clima con las nuevas coordenadas.
+    };
+
+    const handleUbicacion = (ubi) => { 
+        setUbicacion(ubi);
+        // Luego, realiza la solicitud de clima con las nuevas coordenadas.
+    };
 
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-28.0632&longitude=-67.5649&hourly=temperature_2m,relativehumidity_2m,weathercode,visibility&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,uv_index_clear_sky_max,precipitation_probability_max,windspeed_10m_max&current_weather=true&timezone=auto&forecast_days=1');
+                const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${cityCoordinates.latitude}&longitude=${cityCoordinates.longitude}&hourly=temperature_2m,relativehumidity_2m,weathercode,visibility&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,uv_index_clear_sky_max,precipitation_probability_max,windspeed_10m_max&current_weather=true&timezone=auto&forecast_days=1`);
                 if (!response.ok) {
                     throw new Error('Error en la solicitud a la API');
                 }
@@ -43,7 +55,7 @@ const Clima = () => {
         }
         fetchData();
         fetchAirQuality();
-    }, []);
+    }, [cityCoordinates]);
 
 
     if (!weatherData || !airQuality) {
@@ -70,6 +82,9 @@ const Clima = () => {
                         data3={traduccionClima[weatherCode]?.name} /* aqui quiero que vaya el name */
                         icono={traduccionClima[weatherCode]?.image_src}  /* aqui quiero que vaya el image_src */
                         factor={weatherData.current_weather.temperature * 2.5}
+                        onCitySearch={handleCitySearch} // Pasa la función de búsqueda de ciudades
+                        ubicacion={ubicacion}
+                        ubi={handleUbicacion}
                     />
                 </div>
                 <div className='col-lg-9 col-sm-12 text-center my-2'>
