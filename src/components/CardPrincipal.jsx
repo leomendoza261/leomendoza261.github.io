@@ -41,7 +41,7 @@ const CardPrincipal = ({ titulo, fecha, data, data2, data3, data4, icono, factor
             <h5>{titulo}</h5>
 
             <p type="button" class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover mb-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <a>{ubicacion} <Search /></a>
+                {ubicacion} <Search />
             </p>
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
