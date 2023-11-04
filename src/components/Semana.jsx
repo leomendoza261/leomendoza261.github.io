@@ -8,7 +8,7 @@ const Semana = ({ cityCoordinates, Imagen1, Imagen2 }) => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${cityCoordinates.latitude}&longitude=${cityCoordinates.longitude}&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=auto`);
+                const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${cityCoordinates.latitude}&longitude=${cityCoordinates.longitude}&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=America%2FSao_Paulo`);
                 if (!response.ok) {
                     throw new Error('Error en la solicitud a la API');
                 }
@@ -23,7 +23,7 @@ const Semana = ({ cityCoordinates, Imagen1, Imagen2 }) => {
 
     if (!weatherWeekData) {
         return (
-            <div className="container-fluid vh-100 bg-info text-white">
+            <div className="bg-info text-white">
                 <div class="spinner-border text-light" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>
