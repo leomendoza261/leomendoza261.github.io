@@ -20,7 +20,7 @@ function ListaBotones({ data, onBusClick, setRoute, valor }) {
                 <select className="btn btn-info border-white text-white me-1" value={agencies} onChange={handleRouteChange}>
                     <option class="btn btn-warning">Rutas</option>
                     {valor.map((e) => (
-                        <option class="btn btn-warning" key={e} value={e.route_id}>
+                        <option class="btn btn-warning" key={e.id} value={e.route_id}>
                             {e.route_short_name}
                         </option>
                     ))}

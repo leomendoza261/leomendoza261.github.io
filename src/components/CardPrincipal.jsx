@@ -42,7 +42,7 @@ const CardPrincipal = ({ titulo, fecha, data, data2, data3, data4, icono, factor
             <p type="button" class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover mb-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 {ubicacion} <Search />
             </p>
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content bg-warning">
                         <div class="modal-header">
@@ -78,7 +78,7 @@ const CardPrincipal = ({ titulo, fecha, data, data2, data3, data4, icono, factor
 
             <p>{fecha}</p>
             <div className='row'>
-                <img src={icono} alt="" srcset="" height={200} width={200} />
+                <img src={icono} alt="" height={200} width={200} />
                 <p className='fs-4'>{data3}</p>
             </div>
             <div className='row'>
