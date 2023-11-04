@@ -10,20 +10,22 @@ import obtenerNivelUV from '../helpers/indiceUV';
 import formatearFecha from '../helpers/fecha';
 import traduccionClima from "../data/weatherData.json"
 import obtenerCalidadAire from '../helpers/european_AQI';
+import Semana from './Semana';
 
 
 const Clima = () => {
+    const [mostrarDashboard, setMostrarDashboard] = useState(true);
     const [weatherData, setWeatherData] = useState(null);
     const [airQuality, setAirQuality] = useState(null);
     const [ubicacion, setUbicacion] = useState("Tinogasta");
     const [cityCoordinates, setCityCoordinates] = useState({ latitude: -28.0632, longitude: -67.5649 });
 
-    const handleCitySearch = (latitude, longitude) => { 
+    const handleCitySearch = (latitude, longitude) => {
         setCityCoordinates({ latitude, longitude });
         // Luego, realiza la solicitud de clima con las nuevas coordenadas.
     };
 
-    const handleUbicacion = (ubi) => { 
+    const handleUbicacion = (ubi) => {
         setUbicacion(ubi);
         // Luego, realiza la solicitud de clima con las nuevas coordenadas.
     };
@@ -67,7 +69,7 @@ const Clima = () => {
             </div>
         )
     }
-
+    console.log(weatherData)
     const weatherCode = weatherData.current_weather.weathercode;
 
     return (
@@ -88,8 +90,15 @@ const Clima = () => {
                     />
                 </div>
                 <div className='col-lg-9 col-sm-12 text-center my-2'>
-                    <h5 >Hoy</h5>
-                    <Dashboard dia={weatherData.hourly} />
+                    <button className='btn btn-outline-warning border-info text-white py-0' onClick={() => setMostrarDashboard(true)}>Hoy</button>
+                    <button className='btn btn-outline-warning border-info text-white py-0' onClick={() => setMostrarDashboard(false)}>Semana</button>
+                    {mostrarDashboard? 
+                        <Dashboard dia={weatherData.hourly} /> : 
+                        <Semana
+                        cityCoordinates={cityCoordinates}    
+                        Imagen1={<Soleado />} Imagen2={<Noche />} 
+                        /> 
+                    }
                 </div>
             </div>
 
