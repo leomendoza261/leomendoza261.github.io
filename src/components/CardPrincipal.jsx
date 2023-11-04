@@ -58,7 +58,6 @@ const CardPrincipal = ({ titulo, fecha, data, data2, data3, data4, icono, factor
                                     value={cityQuery}
                                     onChange={(e) => setCityQuery(e.target.value)}
                                 />
-                                <button class="btn btn-warning border-white text-white" onClick={setCityQuery}>Buscar</button>
                             </div>
                             <div className="list-group">
                                 {ciudades.results ? (

@@ -8,7 +8,7 @@ const CardSemana = ({dia,code, data, data2, Imagen1, Imagen2}) => {
                 <div className="row ">
                     <div className="col-12">
                         <img src={traduccionClima[code]?.image_src} alt="" height={100} width={100}/>
-                        {traduccionClima[code]?.name}
+                        <p>{traduccionClima[code]?.name}</p>
                     </div>
                 </div>
                 <div className="row">
