@@ -42,6 +42,7 @@ const Semana = ({ cityCoordinates, Imagen1, Imagen2 }) => {
                         <CardSemana
                             key={index}
                             dia={dia}
+                            code={weatherWeekData.daily.weathercode[index]}
                             data={weatherWeekData.daily.temperature_2m_max[index]}
                             data2={weatherWeekData.daily.temperature_2m_min[index]}
                             Imagen1={Imagen1}
