@@ -19,7 +19,7 @@ const Semana = ({ cityCoordinates, Imagen1, Imagen2 }) => {
             }
         }
         fetchData();
-    }, []);
+    }, [cityCoordinates]);
 
     if (!weatherWeekData) {
         return (
